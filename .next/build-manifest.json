@@ -27,15 +27,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/dashboard.js"
     ],
-    "/dashboard/edit/[id]": [
+    "/dashboard/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/dashboard/edit/[id].js"
-    ],
-    "/dashboard/post": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/dashboard/post.js"
+      "static/chunks/pages/dashboard/[id].js"
     ]
   },
   "ampFirstPages": []

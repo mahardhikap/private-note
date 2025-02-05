@@ -42,10 +42,10 @@ const Admin: React.FC<AdminProps> = ({ children }) => {
       <div className="text-center py-5 bg-white text-lg sticky top-0 z-10">
        <strong>TulisanQ</strong> Admin Dashboard💻
       </div>
-      <div className="mx-auto container p-3">
+      <div className="mx-auto container">
         <div className="grid grid-cols-5 min-h-screen">
           <div className="col-span-1 sticky top-20 h-fit">
-            <ul className="flex flex-col gap-5">
+            <ul className="flex flex-col gap-5 list-none">
               {AdminHeader?.map((item, i) => {
                 return item.action === "logout" ? (
                   <li key={i} onClick={handleLogout} className="cursor-pointer">
@@ -67,7 +67,7 @@ const Admin: React.FC<AdminProps> = ({ children }) => {
               })}
             </ul>
           </div>
-          <div className="col-span-4">{children}</div>
+          <div className="col-span-4 p-3">{children}</div>
         </div>
       </div>
       <div className="text-center my-5 font-semibold">&copy;2025 TulisanQ. All rights reserved.</div>

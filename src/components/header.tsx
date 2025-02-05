@@ -11,7 +11,7 @@ const Header: React.FC = () => {
     <div className="py-5 bg-white sticky top-0 z-10">
       <div className="container flex justify-between mx-auto w-10/12 lg:w-2/3 xl:w-3/5">
         <div className="font-bold text-xl truncate">TulisanQ.</div>
-        <ul className="flex flex-row gap-5">
+        <ul className="flex flex-row gap-5 list-none">
           {MainHeader?.map((item, i) => {
             return (
               <Link href={`${item.url}`} key={i}>

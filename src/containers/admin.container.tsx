@@ -40,7 +40,7 @@ const Admin: React.FC<AdminProps> = ({ children }) => {
   return (
     <>
       <div className="text-center py-5 bg-white text-lg sticky top-0 z-10">
-       <strong>Random</strong> Admin Dashboard💻
+       <strong>TulisanQ</strong> Admin Dashboard💻
       </div>
       <div className="mx-auto container p-3">
         <div className="grid grid-cols-5 min-h-screen">
@@ -70,7 +70,7 @@ const Admin: React.FC<AdminProps> = ({ children }) => {
           <div className="col-span-4">{children}</div>
         </div>
       </div>
-      <div className="text-center my-5 font-semibold">&copy;2025 Random. All rights reserved.</div>
+      <div className="text-center my-5 font-semibold">&copy;2025 TulisanQ. All rights reserved.</div>
     </>
   );
 };

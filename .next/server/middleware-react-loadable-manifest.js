@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{\"dashboard\\\\post.tsx -> react-quill\":{\"id\":\"dashboard\\\\post.tsx -> react-quill\",\"files\":[\"static/chunks/node_modules_react-quill_lib_index_js.js\"]}}"
+self.__REACT_LOADABLE_MANIFEST="{\"dashboard\\\\edit\\\\[id].tsx -> react-quill\":{\"id\":\"dashboard\\\\edit\\\\[id].tsx -> react-quill\",\"files\":[\"static/chunks/node_modules_react-quill_lib_index_js.js\"]},\"dashboard\\\\post.tsx -> react-quill\":{\"id\":\"dashboard\\\\post.tsx -> react-quill\",\"files\":[\"static/chunks/node_modules_react-quill_lib_index_js.js\"]}}"

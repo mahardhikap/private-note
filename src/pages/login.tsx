@@ -25,14 +25,14 @@ const Login = () => {
         localStorage.setItem("token", result?.data?.token);
         Swal.fire({
           icon: "success",
-          title: "Akhirnya berhasil masuk🤣",
+          title: "Akhirnya berhasil login🎉",
           showConfirmButton: false,
           timer: 1500,
         }).then(()=>router.replace('/dashboard'))
       } else {
         Swal.fire({
           icon: "error",
-          title: "Yang bener gobl*k!😑",
+          title: "Yang bener nulisnya!😑",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -43,7 +43,7 @@ const Login = () => {
   };
   return (
     <div className="flex flex-col gap-2 items-center justify-center h-screen">
-      <h1 className="font-semibold">Random. LOGIN ^^</h1>
+      <h1 className="font-semibold text-lg">Login TulisanQ 👀</h1>
       <input
         type="text"
         name="username"

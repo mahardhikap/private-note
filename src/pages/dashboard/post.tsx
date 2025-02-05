@@ -116,7 +116,7 @@ const Post: React.FC = () => {
           onChange={(value) =>
             setDataArticle({ ...dataArticle, article: value })
           }
-          className="border-2 border-black h-96 overflow-y-auto rounded"
+          className="border-2 border-black rounded"
           modules={quilModules}
           formats={quilFormats}
         />

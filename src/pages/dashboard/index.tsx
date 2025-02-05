@@ -139,16 +139,14 @@ const Dashboard: React.FC = () => {
             <div key={i} className="relative">
               <div className="flex absolute top-0 p-2 gap-2">
                 <button
-                  className="underline text-green-500"
                   onClick={() => router.push(`/dashboard/edit/${item.id}`)}
                 >
-                  Edit
+                  📝
                 </button>
                 <button
-                  className="underline text-red-500"
                   onClick={() => handleDeleteArticle(item.id)}
                 >
-                  Delete
+                  🚫
                 </button>
               </div>
               <CardComponent

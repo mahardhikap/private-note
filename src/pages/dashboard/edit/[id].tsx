@@ -47,7 +47,7 @@ const Edit: React.FC = () => {
   };
 
   const handleUploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = Array.from(e.target.files || []);
+    const selectedFiles = Array?.from(e.target.files || []);
     setFiles(selectedFiles);
   };
 
@@ -57,7 +57,7 @@ const Edit: React.FC = () => {
       if (files.length > 0) {
         const uploadResult = await uploadFiles(files);
         if (uploadResult) {
-          imagePaths = uploadResult.filePaths;
+          imagePaths = uploadResult?.filePaths;
           setDataArticle((prevData) => ({
             ...prevData,
             image: imagePaths[0],
@@ -80,7 +80,7 @@ const Edit: React.FC = () => {
       }
     } catch (error: any) {
       toast.error(error?.message);
-      if (imagePaths.length > 0) {
+      if (imagePaths?.length > 0) {
         const filenamesToDelete = imagePaths
           .map(extractFilename)
           .filter((filename): filename is string => filename !== null);
@@ -112,15 +112,15 @@ const Edit: React.FC = () => {
         >
           {files.length > 0 ? (
             <Image
-              src={URL.createObjectURL(files[0])}
-              alt={files[0].name}
+              src={URL?.createObjectURL(files[0])}
+              alt={files[0]?.name}
               className="object-cover h-full w-full rounded-xl"
               width={700}
               height={700}
             />
           ) : dataArticle.image ? (
             <Image
-              src={dataArticle.image}
+              src={dataArticle?.image}
               alt="Article Image"
               className="object-cover h-full w-full rounded-xl"
               width={700}

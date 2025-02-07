@@ -32,7 +32,7 @@ const Post: React.FC = () => {
   };
 
   const handleUploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = Array.from(e.target.files || []);
+    const selectedFiles = Array?.from(e.target.files || []);
     setFiles(selectedFiles);
   };
 
@@ -42,7 +42,7 @@ const Post: React.FC = () => {
       if (files.length > 0) {
         const uploadResult = await uploadFiles(files);
         if (uploadResult) {
-          imagePaths = uploadResult.filePaths;
+          imagePaths = uploadResult?.filePaths;
           setDataArticle((prevData) => ({
             ...prevData,
             image: imagePaths[0],
@@ -65,7 +65,7 @@ const Post: React.FC = () => {
       }
     } catch (error: any) {
       toast.error(error?.message);
-      if (imagePaths.length > 0) {
+      if (imagePaths?.length > 0) {
         const filenamesToDelete = imagePaths
           .map(extractFilename)
           .filter((filename): filename is string => filename !== null);
@@ -90,8 +90,8 @@ const Post: React.FC = () => {
         >
           {files.length > 0 ? (
             <Image
-              src={URL.createObjectURL(files[0])}
-              alt={files[0].name}
+              src={URL?.createObjectURL(files[0])}
+              alt={files[0]?.name}
               className="object-cover h-full w-full rounded-xl"
               width={700}
               height={700}
@@ -106,13 +106,13 @@ const Post: React.FC = () => {
           type="text"
           className="p-3 border-2 border-black rounded"
           placeholder="Isi judul post"
-          value={dataArticle.title}
+          value={dataArticle?.title}
           onChange={handleChange}
           autoComplete="off"
         />
         <div>Artikel Post</div>
         <ReactQuill
-          value={dataArticle.article}
+          value={dataArticle?.article}
           onChange={(value) =>
             setDataArticle({ ...dataArticle, article: value })
           }

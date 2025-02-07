@@ -44,7 +44,7 @@ const Dashboard: React.FC = () => {
 
   const handleNextPage = (totalPages: number) => {
     if (params.page < totalPages) {
-      const nextPage = params.page + 1;
+      const nextPage = Number(params?.page) + 1;
       setParams((prevParams) => ({ ...prevParams, page: nextPage }));
       router.push({
         pathname: router.pathname,
@@ -55,7 +55,7 @@ const Dashboard: React.FC = () => {
 
   const handlePrevPage = () => {
     if (params.page > 1) {
-      const prevPage = params.page - 1;
+      const prevPage = Number(params?.page) - 1;
       setParams((prevParams) => ({ ...prevParams, page: prevPage }));
       router.push({
         pathname: router.pathname,
@@ -84,8 +84,8 @@ const Dashboard: React.FC = () => {
           try {
             const detail = await detailArticle(id);
             if (detail?.code === 200) {
-              const imagesToDelete = extractFilename(detail?.data?.image || '')
-              if(imagesToDelete){
+              const imagesToDelete = extractFilename(detail?.data?.image || "");
+              if (imagesToDelete) {
                 await deleteFiles([imagesToDelete]);
               }
               const response = await deleteArticle(id);
@@ -143,11 +143,7 @@ const Dashboard: React.FC = () => {
                 >
                   📝
                 </button>
-                <button
-                  onClick={() => handleDeleteArticle(item.id)}
-                >
-                  🚫
-                </button>
+                <button onClick={() => handleDeleteArticle(item.id)}>🚫</button>
               </div>
               <CardComponent
                 id={item?.id}

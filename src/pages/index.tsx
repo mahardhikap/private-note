@@ -12,7 +12,7 @@ const Home: React.FC = () => {
   const router = useRouter();
   const [params, setParams] = useState<ArticlesParamsI>({
     limit: 4,
-    page: router.query.page as unknown as number ?? 1,
+    page: (router.query.page as unknown as number) ?? 1,
     search: "",
     searchby: "title",
     sort: "DESC",
@@ -32,7 +32,7 @@ const Home: React.FC = () => {
 
   const handleNextPage = (totalPages: number) => {
     if (params.page < totalPages) {
-      const nextPage = params.page + 1;
+      const nextPage = Number(params?.page) + 1;
       setParams((prevParams) => ({ ...prevParams, page: nextPage }));
       router.push({
         pathname: router.pathname,
@@ -43,7 +43,7 @@ const Home: React.FC = () => {
 
   const handlePrevPage = () => {
     if (params.page > 1) {
-      const prevPage = params.page - 1;
+      const prevPage = Number(params?.page) - 1;
       setParams((prevParams) => ({ ...prevParams, page: prevPage }));
       router.push({
         pathname: router.pathname,

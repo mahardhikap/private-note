@@ -18,7 +18,6 @@ const CardComponent: React.FC<CardI> = ({
 }) => {
   const router = useRouter();
   const path = router.pathname;
-  console.log("ini lokasi", path);
   return (
     <div className="grid grid-cols-1 xl:grid-cols-3 gap-2">
       {image === "" || image === null ? (

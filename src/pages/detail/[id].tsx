@@ -6,8 +6,10 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { formatDateToIndonesian } from "@/utils/convert-date";
 import Image from "next/image";
+import DetailSkeleton from "@/components/detail/detail-skeleton";
 
 const Detail: React.FC = () => {
+  const [loading, setLoading] = useState<boolean>(true);
   const [article, setArticle] = useState<DetailArticleI>();
   const router = useRouter();
   const { id } = router.query;
@@ -18,6 +20,8 @@ const Detail: React.FC = () => {
       setArticle(result);
     } catch (error: any) {
       toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -25,7 +29,9 @@ const Detail: React.FC = () => {
     getDetailArticle();
   }, [id]);
 
-  return (
+  return loading ? (
+    <DetailSkeleton />
+  ) : (
     <Container>
       <button onClick={() => router.back()} className="mb-4">
         &larr; kembali ke halaman

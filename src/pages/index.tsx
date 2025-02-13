@@ -7,9 +7,13 @@ import CardComponent from "@/components/index/card";
 import { formatDateToIndonesian } from "@/utils/convert-date";
 import { truncateText } from "@/utils/truncate-text";
 import { useRouter } from "next/router";
+import CardSkeleton from "@/components/index/card-skeleton";
+import Pagination from "@/components/index/pagination";
+import PaginationSkeleton from "@/components/index/pagination-skeleton";
 
 const Home: React.FC = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(true);
   const [params, setParams] = useState<ArticlesParamsI>({
     limit: 4,
     page: (router.query.page as unknown as number) ?? 1,
@@ -27,6 +31,8 @@ const Home: React.FC = () => {
       setArticles(result);
     } catch (error: any) {
       toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -59,35 +65,34 @@ const Home: React.FC = () => {
   return (
     <Container>
       <div className="flex flex-col gap-5">
-        {articles?.data?.list?.map((item, i) => {
-          return (
-            <CardComponent
-              key={i}
-              id={item.id}
-              image={item.image}
-              title={truncateText(item.title, 50)}
-              date={formatDateToIndonesian(item.created_at)}
-              content={truncateText(item.article, 200)}
-            />
-          );
-        })}
-        <div className="flex justify-between items-center">
-          <button onClick={handlePrevPage} className="font-bold">
-            &larr; Prev
-          </button>
-          <button>
-            Halaman <strong>{articles?.data?.pagination?.pageNow}</strong> dari{" "}
-            <strong>{articles?.data?.pagination?.totalPage}</strong>
-          </button>
-          <button
-            onClick={() =>
+        {loading
+          ? Array(4)
+              .fill(null)
+              .map((_, index) => <CardSkeleton key={index} />)
+          : articles?.data?.list?.map((item, i) => {
+              return (
+                <CardComponent
+                  key={i}
+                  id={item.id}
+                  image={item.image}
+                  title={truncateText(item.title, 50)}
+                  date={formatDateToIndonesian(item.created_at)}
+                  content={truncateText(item.article, 200)}
+                />
+              );
+            })}
+        {loading ? (
+          <PaginationSkeleton />
+        ) : (
+          <Pagination
+            currentPage={params.page}
+            totalPages={articles?.data?.pagination?.totalPage || 1}
+            onPrevPage={handlePrevPage}
+            onNextPage={() =>
               handleNextPage(articles?.data?.pagination?.totalPage as number)
             }
-            className="font-bold"
-          >
-            Next &rarr;
-          </button>
-        </div>
+          />
+        )}
       </div>
     </Container>
   );

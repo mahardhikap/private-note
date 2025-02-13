@@ -15,6 +15,9 @@ import { useRouter } from "next/router";
 import { extractFilename } from "@/utils/extract-file-name";
 import { deleteFiles } from "@/api/upload-file.api";
 import Swal from "sweetalert2";
+import CardSkeleton from "@/components/index/card-skeleton";
+import PaginationSkeleton from "@/components/index/pagination-skeleton";
+import Pagination from "@/components/index/pagination";
 
 interface CustomJwtPayload extends JwtPayload {
   username?: string;
@@ -22,6 +25,7 @@ interface CustomJwtPayload extends JwtPayload {
 
 const Dashboard: React.FC = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<CustomJwtPayload | null>(null);
   const [params, setParams] = useState<ArticlesParamsI>({
     limit: 4,
@@ -39,6 +43,8 @@ const Dashboard: React.FC = () => {
       setArticles(result);
     } catch (error: any) {
       toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -134,44 +140,45 @@ const Dashboard: React.FC = () => {
   return (
     <Admin>
       <div className="flex flex-col gap-5">
-        {articles?.data?.list?.map((item, i) => {
-          return (
-            <div key={i} className="relative">
-              <div className="flex absolute top-0 p-2 gap-2">
-                <button
-                  onClick={() => router.push(`/dashboard/edit/${item.id}`)}
-                >
-                  📝
-                </button>
-                <button onClick={() => handleDeleteArticle(item.id)}>🚫</button>
-              </div>
-              <CardComponent
-                id={item?.id}
-                image={item?.image}
-                title={truncateText(item?.title, 50)}
-                date={formatDateToIndonesian(item?.created_at)}
-                content={truncateText(item?.article, 200)}
-              />
-            </div>
-          );
-        })}
-        <div className="flex justify-between items-center">
-          <button onClick={handlePrevPage} className="font-bold">
-            &larr; Prev
-          </button>
-          <button>
-            Halaman <strong>{articles?.data?.pagination?.pageNow}</strong> dari{" "}
-            <strong>{articles?.data?.pagination?.totalPage}</strong>
-          </button>
-          <button
-            onClick={() =>
+        {loading
+          ? Array(4)
+              .fill(null)
+              .map((_, index) => <CardSkeleton key={index} />)
+          : articles?.data?.list?.map((item, i) => {
+              return (
+                <div key={i} className="relative">
+                  <div className="flex absolute top-0 p-2 gap-2">
+                    <button
+                      onClick={() => router.push(`/dashboard/edit/${item.id}`)}
+                    >
+                      📝
+                    </button>
+                    <button onClick={() => handleDeleteArticle(item.id)}>
+                      🚫
+                    </button>
+                  </div>
+                  <CardComponent
+                    id={item?.id}
+                    image={item?.image}
+                    title={truncateText(item?.title, 50)}
+                    date={formatDateToIndonesian(item?.created_at)}
+                    content={truncateText(item?.article, 200)}
+                  />
+                </div>
+              );
+            })}
+        {loading ? (
+          <PaginationSkeleton />
+        ) : (
+          <Pagination
+            currentPage={params.page}
+            totalPages={articles?.data?.pagination?.totalPage || 1}
+            onPrevPage={handlePrevPage}
+            onNextPage={() =>
               handleNextPage(articles?.data?.pagination?.totalPage as number)
             }
-            className="font-bold"
-          >
-            Next &rarr;
-          </button>
-        </div>
+          />
+        )}
       </div>
     </Admin>
   );

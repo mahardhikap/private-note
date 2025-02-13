@@ -77,8 +77,8 @@ const Dashboard: React.FC = () => {
       showCancelButton: true,
       confirmButtonColor: "#dd3333",
       cancelButtonColor: "#a5dc86",
-      confirmButtonText: "Gas hapus",
-      cancelButtonText: "Gak jadi",
+      confirmButtonText: "Hapus",
+      cancelButtonText: "Batal",
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({

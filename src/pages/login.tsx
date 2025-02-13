@@ -25,14 +25,14 @@ const Login = () => {
         localStorage.setItem("token", result?.data?.token);
         Swal.fire({
           icon: "success",
-          title: "Akhirnya berhasil login🎉",
+          title: "Berhasil login!🎉",
           showConfirmButton: false,
           timer: 1500,
         }).then(()=>router.replace('/dashboard'))
       } else {
         Swal.fire({
           icon: "error",
-          title: "Yang bener nulisnya!😑",
+          title: "Salah nama pengguna atau password!❌",
           showConfirmButton: false,
           timer: 1500,
         });

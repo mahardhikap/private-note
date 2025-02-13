@@ -15,17 +15,17 @@ const Admin: React.FC<AdminProps> = ({ children }) => {
 
   const handleLogout = () => {
     Swal.fire({
-      title: "Buru-buru amat?🤨",
+      title: "Anda ingin logout?🤔",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#dd3333",
       cancelButtonColor: "#a5dc86",
-      confirmButtonText: "Gas cabut",
-      cancelButtonText:"Masih betah"
+      confirmButtonText: "Logout",
+      cancelButtonText:"Batal"
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
-          title: "Jangan lupa mampir lagi!😁",
+          title: "Barakallahu fiik!🤲",
           icon: "success",
           showConfirmButton: false,
           timer: 1500,
